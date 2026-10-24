@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMood AI | Movie Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a class="logo" href="#home">🎬 CineMood <span>AI</span></a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#recommendations">Movies</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <div class="eyebrow">✦ YOUR PERSONAL AI MOVIE GUIDE</div>
+            <h1>Movies for your <span>kind of mood.</span></h1>
+            <p>
+                Tell us how you feel and what you love.
+                Discover your next favourite movie with CineMood AI.
+            </p>
+            <a class="primary-link" href="#recommend-box">Find my movie <span>→</span></a>
+        </div>
+        <div class="hero-decoration decoration-one">🎞️</div>
+        <div class="hero-decoration decoration-two">🍿</div>
+    </header>
+
+    <main>
+        <section class="recommend-section" id="recommend-box">
+            <div class="section-heading">
+                <div class="eyebrow">LET'S PERSONALIZE YOUR EXPERIENCE</div>
+                <h2>What's your vibe today?</h2>
+                <p>Choose a genre and mood to get your recommendations.</p>
+            </div>
+
+            <div class="selection-card">
+                <div class="input-group">
+                    <label for="genre">🎭 Choose a genre</label>
+                    <select id="genre">
+                        <option value="">Select a genre</option>
+                        {% for genre in genres %}
+                        <option value="{{ genre }}">{{ genre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="mood">😊 Choose your mood</label>
+                    <select id="mood">
+                        <option value="">Select your mood</option>
+                        {% for mood in moods %}
+                        <option value="{{ mood }}">{{ mood }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="quick-moods">
+                <span>Quick mood:</span>
+                <button type="button" onclick="selectMood('Happy')">😄 Happy</button>
+                <button type="button" onclick="selectMood('Romantic')">❤️ Romantic</button>
+                <button type="button" onclick="selectMood('Excited')">🔥 Excited</button>
+                <button type="button" onclick="selectMood('Suspenseful')">😱 Suspenseful</button>
+                <button type="button" onclick="selectMood('Relaxed')">😌 Relaxed</button>
+                <button type="button" onclick="selectMood('Adventurous')">🗺️ Adventurous</button>
+            </div>
+
+            <button class="recommend-button" id="recommend-button"
+                    type="button" onclick="getRecommendations()">
+                <span>✨ Recommend Movies</span><span>→</span>
+            </button>
+            <p id="form-error" class="form-error" role="alert"></p>
+        </section>
+
+        <section class="results-section" id="recommendations">
+            <div class="result-header">
+                <div>
+                    <div class="eyebrow">PICKED FOR YOU</div>
+                    <h2>Your movie lineup</h2>
+                    <p id="result-info">Your personalized recommendations will appear here.</p>
+                </div>
+            </div>
+
+            <div id="loading" class="loading hidden" aria-live="polite">
+                <div class="spinner"></div>
+                <p>Finding movies that match your vibe...</p>
+            </div>
+
+            <div id="movie-grid" class="movie-grid">
+                <div class="empty-state">
+                    <div class="empty-icon">🎬</div>
+                    <h3>Your next movie is waiting</h3>
+                    <p>Select a genre and mood to start exploring.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="eyebrow">BEHIND THE RECOMMENDATIONS</div>
+            <h2>Powered by <span>machine learning.</span></h2>
+            <p class="about-description">
+                CineMood AI combines genre matching, mood-based rules,
+                TF-IDF and cosine similarity to rank movies for your
+                selected preferences. OMDb provides poster images when available.
+            </p>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Smart matching</h3>
+                    <p>TF-IDF and cosine similarity compare movie genre information.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">😊</div>
+                    <h3>Mood-aware</h3>
+                    <p>Choose how you feel to personalize your movie suggestions.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">🎞️</div>
+                    <h3>Movie posters</h3>
+                    <p>Poster artwork is fetched from OMDb when it is available.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a class="logo footer-logo" href="#home">🎬 CineMood <span>AI</span></a>
+        <p>Mood & Genre Based Movie Recommendation System Using Machine Learning</p>
+        <p class="footer-credit">Movie data: MovieLens. Poster data: OMDb API.</p>
+        <p class="copyright">© 2026 CineMood AI · Academic project</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
