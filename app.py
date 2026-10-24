@@ -18,10 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # ---------------------------------------------------------
 # Option A: Set your key in the environment variable OMDB_API_KEY.
 # Option B: Replace the placeholder below with your own key.
-OMDB_API_KEY = os.getenv(
-    "OMDB_API_KEY",
-    "91bf37c4"
-)
+OMDB_API_KEY = os.getenv("OMDB_API_KEY", "")
 
 OMDB_URL = "https://www.omdbapi.com/"
 poster_cache = {}
